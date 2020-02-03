@@ -4,6 +4,9 @@ from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
+Predict.predicting(Predict.recording(), 'model.h5')
+
+
 class Person(QObject):
 
     def __init__(self):
@@ -14,7 +17,7 @@ class Person(QObject):
     @pyqtSlot(str)
     def clicked(self):
         data = Predict.recording()
-        letter = Predict.predicting(data, 'model/model.h5')
+        letter = Predict.predicting(data, 'model.h5')
         self.butLetter.emit(letter)
 
 

@@ -11,18 +11,18 @@ uuu = mfcc_from_mat('data/tuuu.mat', fs)
 yyy = mfcc_from_mat('data/tyyy.mat', fs)
 
 test_input = np.concatenate((aaa, eee, iii, ooo, uuu, yyy))
-print(test_input.shape)
+test_input = np.expand_dims(test_input, 3)
 
-
-test_labels = np.zeros(48)
-for i in range(8, 16):
-    test_labels[i] = 1
-for i in range(16, 24):
-    test_labels[i] = 2
-for i in range(24, 32):
-    test_labels[i] = 3
-for i in range(32, 40):
-    test_labels[i] = 4
-for i in range(40, 48):
-    test_labels[i] = 5
-print(test_labels)
+ta = np.zeros((8, 6))
+ta[:, 0] = 1
+te = np.zeros((8, 6))
+te[:, 1] = 1
+ti = np.zeros((8, 6))
+ti[:, 2] = 1
+to = np.zeros((8, 6))
+to[:, 3] = 1
+tu = np.zeros((8, 6))
+tu[:, 4] = 1
+ty = np.zeros((8, 6))
+ty[:, 5] = 1
+test_labels = np.concatenate((ta, te, ti, to, tu, ty))
