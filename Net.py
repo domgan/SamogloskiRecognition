@@ -17,5 +17,5 @@ model.fit(Feature_Train.train_input, Feature_Train.train_labels, epochs=6)
 results = model.evaluate(Feature_Test.test_input, Feature_Test.test_labels)
 print('test loss, test acc:', results)
 
-model.save('model.h5')
+model.save('/model/model.h5')
 print("Saved model to disk")

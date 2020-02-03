@@ -14,7 +14,7 @@ class Person(QObject):
     @pyqtSlot(str)
     def clicked(self):
         data = Predict.recording()
-        letter = Predict.predicting(data, 'model.h5')
+        letter = Predict.predicting(data, 'model/model.h5')
         self.butLetter.emit(letter)
 
 
