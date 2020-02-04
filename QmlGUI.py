@@ -31,7 +31,3 @@ engine.load('view.qml')
 engine.quit.connect(app.quit)
 
 sys.exit(app.exec_())
-
-#    letter = 'hhhhhhhhhh'
-#    helper.send_file(letter)
-#    sys.exit(app.exec_())
