@@ -30,20 +30,26 @@ ooo1 = mfcc_from_mat('data/ooo1.mat', fs)
 uuu1 = mfcc_from_mat('data/uuu1.mat', fs)
 yyy1 = mfcc_from_mat('data/yyy1.mat', fs)
 
+aaa2 = mfcc_from_mat('data/aaa2.mat', fs)
+eee2 = mfcc_from_mat('data/eee2.mat', fs)
+iii2 = mfcc_from_mat('data/iii2.mat', fs)
+ooo2 = mfcc_from_mat('data/ooo2.mat', fs)
+uuu2 = mfcc_from_mat('data/uuu2.mat', fs)
+yyy2 = mfcc_from_mat('data/yyy2.mat', fs)
 
-train_input = np.concatenate((aaa, aaa1, eee, eee1, iii, iii1, ooo, ooo1, uuu, uuu1, yyy, yyy1))
+train_input = np.concatenate((aaa, aaa1, aaa2, eee, eee1, eee2, iii, iii1, iii2, ooo, ooo1, ooo2, uuu, uuu1, uuu2, yyy, yyy1, yyy2))
 train_input = np.expand_dims(train_input, 3)
 
-ta = np.zeros((60, 6))
+ta = np.zeros((90, 6))
 ta[:, 0] = 1
-te = np.zeros((60, 6))
+te = np.zeros((90, 6))
 te[:, 1] = 1
-ti = np.zeros((60, 6))
+ti = np.zeros((90, 6))
 ti[:, 2] = 1
-to = np.zeros((60, 6))
+to = np.zeros((90, 6))
 to[:, 3] = 1
-tu = np.zeros((60, 6))
+tu = np.zeros((90, 6))
 tu[:, 4] = 1
-ty = np.zeros((60, 6))
+ty = np.zeros((90, 6))
 ty[:, 5] = 1
 train_labels = np.concatenate((ta, te, ti, to, tu, ty))

@@ -3,16 +3,16 @@ import Feature_Train
 import Feature_Test
 
 model = keras.Sequential([
-    keras.layers.Conv2D(64, (3, 3), input_shape=(20, 16, 1), activation='relu'),
-    keras.layers.Conv2D(64, (3, 3), activation='relu'),
+    keras.layers.Conv2D(128, (3, 3), input_shape=(20, 16, 1), activation='relu'),
+    keras.layers.Conv2D(128, (3, 3), activation='relu'),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
-    keras.layers.Conv2D(128, (3, 3), activation='relu'),
-    keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    keras.layers.Conv2D(256, (3, 3), activation='relu'),
+    keras.layers.Conv2D(256, (3, 3), activation='relu'),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
     keras.layers.Flatten(),
-    keras.layers.Dense(256, activation='relu'),
+    keras.layers.Dense(512, activation='relu'),
     keras.layers.Dense(6, activation='softmax')
     ])
 

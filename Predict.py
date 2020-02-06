@@ -45,5 +45,5 @@ def predicting(data, model_path):
     elif predictions[5] > t:
         letter = 'Y'
     else:
-        letter = '---'
+        letter = '----'
     return letter
