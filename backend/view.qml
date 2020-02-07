@@ -9,7 +9,7 @@ Window {
     height: 440
     maximumHeight: 440
     color: "#2e3436"
-    title: qsTr("Samogłoski Recognition")
+    title: qsTr("Vowel Recognition")
 
     Text {
         id: element
