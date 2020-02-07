@@ -100,7 +100,7 @@ class Ui_MainWindow(object):
 
         self.plainTextEdit.setPlainText('j')
         data = Predict.recording()
-        letter = Predict.predicting(data, 'model.h5')
+        letter = Predict.vowel_predicting(data, 'model.h5')
         self.plainTextEdit.setPlainText(letter)
 
         self.change_grey()

@@ -4,23 +4,44 @@ import numpy as np
 import librosa
 
 fs = 8000  # Sample rate
-seconds = 1  # Duration
+seconds = 0.5  # Duration
 bits = 16  # Bit depth
 
 
 def recording():
-    print('Recording...')
+    #print('Recording...')
     myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
     sd.wait()  # Wait until recording is finished
-    print('End of recording')
+    #print('End of recording')
     myrecording = np.squeeze(myrecording)
     return myrecording
 
 
-def predicting(data, model_path):
+def voice_predicting(data, voice_model_path):
+    model = keras.models.load_model(voice_model_path)
+
+    data = data[0:4000]
+    data = data.astype(np.float64)
+    if np.max(data) > 1:
+        data = data / (2 ** (bits - 1))
+    data = librosa.feature.melspectrogram(data, fs)
+    data = np.expand_dims(data, 0)
+    data = np.expand_dims(data, 3)
+
+    predictions_single = model.predict(data)
+    predictions = predictions_single[0]
+    print(predictions)
+    if np.argmax(predictions) == 0:
+        voice = True
+    else:
+        voice = False
+    return voice
+
+
+def vowel_predicting(data, model_path):
     model = keras.models.load_model(model_path)
 
-    data = data[0:8000]
+    data = data[0:4000]
     data = data.astype(np.float64)
     if np.max(data) > 1:
         data = data / (2 ** (bits - 1))

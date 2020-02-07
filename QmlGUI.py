@@ -1,14 +1,15 @@
-import Predict
 import sys
 from PyQt5.QtGui import QGuiApplication
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
-Predict.predicting(Predict.recording(), 'model.h5')  # init tensorflow
+import os
+print('Loading Tensorflow...')
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # disable console warnings from tensorflow
+from backend import Predict
 
 
 class Person(QObject):
-
     def __init__(self):
         QObject.__init__(self)
 
@@ -17,7 +18,10 @@ class Person(QObject):
     @pyqtSlot(str)
     def clicked(self):
         data = Predict.recording()
-        letter = Predict.predicting(data, 'model.h5')
+        if Predict.voice_predicting(data, 'voice_model.h5'):
+            letter = Predict.vowel_predicting(data, 'vowel_model.h5')
+        else:
+            letter = '---'
         self.butLetter.emit(letter)
 
 
@@ -27,7 +31,7 @@ engine = QQmlApplicationEngine()
 person = Person()
 engine.rootContext().setContextProperty('personal', person)
 
-engine.load('view.qml')
+engine.load('backend/view.qml')
 engine.quit.connect(app.quit)
 
 sys.exit(app.exec_())
