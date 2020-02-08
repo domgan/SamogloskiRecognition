@@ -2,12 +2,12 @@ from tensorflow import keras
 from backend import Vowel_Feature_Train, Vowel_Feature_Test
 
 model = keras.Sequential([
-    keras.layers.Conv2D(64, (5, 5), padding='same', input_shape=(20, 8, 1), activation='relu'),
-    keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu'),
+    keras.layers.Conv2D(64, (7, 7), padding='same', input_shape=(20, 16, 1), activation='relu'),
+    keras.layers.Conv2D(64, (7, 7), padding='same', activation='relu'),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
-    keras.layers.Conv2D(128, (3, 3), padding='same', activation='relu'),
-    keras.layers.Conv2D(128, (3, 3), padding='same', activation='relu'),
+    keras.layers.Conv2D(128, (5, 5), padding='same', activation='relu'),
+    keras.layers.Conv2D(128, (5, 5), padding='same', activation='relu'),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
     keras.layers.Flatten(),

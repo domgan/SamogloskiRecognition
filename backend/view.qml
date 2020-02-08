@@ -34,7 +34,7 @@ Window {
         width: 231
         height: 31
         color: "#e3e0e0"
-        text: qsTr("A    E    I    O    U    Y")
+        text: qsTr("A    E    I    O    U    Y      1 second recording")
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         anchors.horizontalCenter: parent.horizontalCenter

@@ -4,7 +4,7 @@ import numpy as np
 import librosa
 
 fs = 8000  # Sample rate
-seconds = 0.5  # Duration
+seconds = 1  # Duration
 bits = 16  # Bit depth
 
 
@@ -20,7 +20,7 @@ def recording():
 def voice_predicting(data, voice_model_path):
     model = keras.models.load_model(voice_model_path)
 
-    data = data[0:4000]
+    data = data[0:8000]
     data = data.astype(np.float64)
     if np.max(data) > 1:
         data = data / (2 ** (bits - 1))
@@ -41,7 +41,7 @@ def voice_predicting(data, voice_model_path):
 def vowel_predicting(data, model_path):
     model = keras.models.load_model(model_path)
 
-    data = data[0:4000]
+    data = data[0:8000]
     data = data.astype(np.float64)
     if np.max(data) > 1:
         data = data / (2 ** (bits - 1))

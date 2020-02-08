@@ -6,7 +6,7 @@ import scipy.io
 def mfcc_from_mat(path, fs=8000):
     mat = scipy.io.loadmat(path)
     mat = mat['y']
-    mat = mat[4000:8000, :]  # shorten to 1 seconds
+    mat = mat[0:8000, :]  # shorten to 1 seconds
     arr = []
     for i in range(mat.shape[1]):
         m = librosa.feature.mfcc(mat[:, i], fs)
