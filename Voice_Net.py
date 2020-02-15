@@ -19,7 +19,7 @@ model.compile(optimizer=keras.optimizers.Adam(lr=0.001),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 
-model.fit(Voice_Feature_Train.train_input, Voice_Feature_Train.train_labels, epochs=4)
+model.fit(Voice_Feature_Train.train_input, Voice_Feature_Train.train_labels, epochs=3)
 
 model.save('voice_model.h5', include_optimizer=False)
 print("Saved model to disk")

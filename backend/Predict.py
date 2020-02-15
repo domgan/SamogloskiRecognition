@@ -3,7 +3,7 @@ from tensorflow import keras
 import numpy as np
 import librosa
 
-fs = 8000  # Sample rate
+fs = 44100  # Sample rate
 seconds = 1  # Duration
 bits = 16  # Bit depth
 
@@ -14,6 +14,7 @@ def recording():
     sd.wait()  # Wait until recording is finished
     #print('End of recording')
     myrecording = np.squeeze(myrecording)
+    myrecording = librosa.resample(myrecording, fs, 8000)
     return myrecording
 
 
