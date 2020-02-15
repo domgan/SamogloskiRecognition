@@ -1,2 +1,6 @@
 #pycharm config folder:
 .idea
+
+#models:
+voice_model.h5
+vowel_model.h5
