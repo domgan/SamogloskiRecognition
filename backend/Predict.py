@@ -3,69 +3,66 @@ from tensorflow import keras
 import numpy as np
 import librosa
 
-fs = 44100  # Sample rate
-seconds = 1  # Duration
-bits = 16  # Bit depth
 
+class Predict:
+    def __init__(self):
+        self.fs = 44100  # Sample rate
+        self.seconds = 1  # Duration
+        self.bits = 16  # Bit depth
+        # print('Recording...')
+        myrecording = sd.rec(int(self.seconds * self.fs), samplerate=self.fs, channels=1)
+        sd.wait()  # Wait until recording is finished
+        # print('End of recording')
+        myrecording = np.squeeze(myrecording)
+        self.data = librosa.resample(myrecording, self.fs, 8000)
 
-def recording():
-    #print('Recording...')
-    myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
-    sd.wait()  # Wait until recording is finished
-    #print('End of recording')
-    myrecording = np.squeeze(myrecording)
-    myrecording = librosa.resample(myrecording, fs, 8000)
-    return myrecording
+    def voice_predicting(self, voice_model_path):
+        model = keras.models.load_model(voice_model_path)
 
+        data = self.data[0:8000]
+        data = data.astype(np.float64)
+        if np.max(data) > 1:
+            data = data / (2 ** (self.bits - 1))
+        data = librosa.feature.melspectrogram(data, self.fs)
+        data = np.expand_dims(data, 0)
+        data = np.expand_dims(data, 3)
 
-def voice_predicting(data, voice_model_path):
-    model = keras.models.load_model(voice_model_path)
+        predictions_single = model.predict(data)
+        predictions = predictions_single[0]
+        print(predictions)
+        if np.argmax(predictions) == 0:
+            voice = True
+        else:
+            voice = False
+        return voice
 
-    data = data[0:8000]
-    data = data.astype(np.float64)
-    if np.max(data) > 1:
-        data = data / (2 ** (bits - 1))
-    data = librosa.feature.melspectrogram(data, fs)
-    data = np.expand_dims(data, 0)
-    data = np.expand_dims(data, 3)
+    def vowel_predicting(self, model_path):
+        model = keras.models.load_model(model_path)
 
-    predictions_single = model.predict(data)
-    predictions = predictions_single[0]
-    print(predictions)
-    if np.argmax(predictions) == 0:
-        voice = True
-    else:
-        voice = False
-    return voice
+        data = self.data[0:8000]
+        data = data.astype(np.float64)
+        if np.max(data) > 1:
+            data = data / (2 ** (self.bits - 1))
+        data = librosa.feature.mfcc(data, self.fs)
+        data = np.expand_dims(data, 0)
+        data = np.expand_dims(data, 3)
 
-
-def vowel_predicting(data, model_path):
-    model = keras.models.load_model(model_path)
-
-    data = data[0:8000]
-    data = data.astype(np.float64)
-    if np.max(data) > 1:
-        data = data / (2 ** (bits - 1))
-    data = librosa.feature.mfcc(data, fs)
-    data = np.expand_dims(data, 0)
-    data = np.expand_dims(data, 3)
-
-    predictions_single = model.predict(data)
-    predictions = predictions_single[0]
-    print(predictions)
-    t = 0.5
-    if predictions[0] > t:
-        letter = 'A'
-    elif predictions[1] > t:
-        letter = 'E'
-    elif predictions[2] > t:
-        letter = 'I'
-    elif predictions[3] > t:
-        letter = 'O'
-    elif predictions[4] > t:
-        letter = 'U'
-    elif predictions[5] > t:
-        letter = 'Y'
-    else:
-        letter = '----'
-    return letter
+        predictions_single = model.predict(data)
+        predictions = predictions_single[0]
+        print(predictions)
+        t = 0.5
+        if predictions[0] > t:
+            letter = 'A'
+        elif predictions[1] > t:
+            letter = 'E'
+        elif predictions[2] > t:
+            letter = 'I'
+        elif predictions[3] > t:
+            letter = 'O'
+        elif predictions[4] > t:
+            letter = 'U'
+        elif predictions[5] > t:
+            letter = 'Y'
+        else:
+            letter = '----'
+        return letter

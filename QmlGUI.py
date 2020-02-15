@@ -6,7 +6,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import os
 print('Loading Tensorflow...')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # disable console warnings from tensorflow
-from backend import Predict
+from backend.Predict import Predict
 
 
 class Person(QObject):
@@ -17,9 +17,9 @@ class Person(QObject):
 
     @pyqtSlot(str)
     def clicked(self):
-        data = Predict.recording()
-        if Predict.voice_predicting(data, 'voice_model.h5'):
-            letter = Predict.vowel_predicting(data, 'vowel_model.h5')
+        predict = Predict()
+        if predict.voice_predicting('voice_model.h5'):
+            letter = predict.vowel_predicting('vowel_model.h5')
         else:
             letter = '---'
         self.butLetter.emit(letter)
