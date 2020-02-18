@@ -37,6 +37,8 @@ yyy2 = melspec_from_mat('data/yyy2.mat')
 
 n = melspec_from_mat('data/n.mat')
 n1 = melspec_from_mat('data/n1.mat')
+n2 = melspec_from_mat('data/n2.mat')
+n3 = melspec_from_mat('data/n3.mat')
 
 train_input = np.concatenate((aaa, aaa1, aaa2,
                               eee, eee1, eee2,
@@ -44,11 +46,11 @@ train_input = np.concatenate((aaa, aaa1, aaa2,
                               ooo, ooo1, ooo2,
                               uuu, uuu1, uuu2,
                               yyy, yyy1, yyy2,
-                              n, n1))
+                              n, n1, n2, n3))
 train_input = np.expand_dims(train_input, 3)
 
 ts = np.zeros((30*6*3, 2))
 ts[:, 0] = 1
-tn = np.zeros((60*2, 2))
+tn = np.zeros((60*4, 2))
 tn[:, 1] = 1
 train_labels = np.concatenate((ts, tn))

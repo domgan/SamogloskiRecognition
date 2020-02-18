@@ -1,5 +1,5 @@
 import numpy as np
-from backend.Vowel_Feature_Train import mfcc_from_mat
+from preprocessing.Vowel_Feature_Train import mfcc_from_mat
 
 fs = 8000
 

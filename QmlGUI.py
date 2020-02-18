@@ -6,7 +6,7 @@ from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 import os
 print('Loading Tensorflow...')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # disable console warnings from tensorflow
-from backend.Predict import Predict
+from Predict import Predict
 
 
 class Person(QObject):
@@ -31,7 +31,7 @@ engine = QQmlApplicationEngine()
 person = Person()
 engine.rootContext().setContextProperty('personal', person)
 
-engine.load('backend/view.qml')
+engine.load('view.qml')
 engine.quit.connect(app.quit)
 
 sys.exit(app.exec_())
