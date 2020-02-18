@@ -35,22 +35,28 @@ ooo2 = melspec_from_mat('data/ooo2.mat')
 uuu2 = melspec_from_mat('data/uuu2.mat')
 yyy2 = melspec_from_mat('data/yyy2.mat')
 
+aaa4 = melspec_from_mat('data/aaa4.mat')
+eee4 = melspec_from_mat('data/eee4.mat')
+iii4 = melspec_from_mat('data/iii4.mat')
+ooo4 = melspec_from_mat('data/ooo4.mat')
+uuu4 = melspec_from_mat('data/uuu4.mat')
+yyy4 = melspec_from_mat('data/yyy4.mat')
+
 n = melspec_from_mat('data/n.mat')
 n1 = melspec_from_mat('data/n1.mat')
 n2 = melspec_from_mat('data/n2.mat')
 n3 = melspec_from_mat('data/n3.mat')
+n4 = melspec_from_mat('data/n4.mat')
 
-train_input = np.concatenate((aaa, aaa1, aaa2,
-                              eee, eee1, eee2,
-                              iii, iii1, iii2,
-                              ooo, ooo1, ooo2,
-                              uuu, uuu1, uuu2,
-                              yyy, yyy1, yyy2,
-                              n, n1, n2, n3))
+train_input = np.concatenate((aaa, aaa1, aaa2, aaa4,
+                              eee, eee1, eee2, eee4,
+                              iii, iii1, iii2, iii4,
+                              ooo, ooo1, ooo2, ooo4,
+                              uuu, uuu1, uuu2, uuu4,
+                              yyy, yyy1, yyy2, yyy4,
+                              n, n1, n2, n3, n4))
 train_input = np.expand_dims(train_input, 3)
 
-ts = np.zeros((30*6*3, 2))
-ts[:, 0] = 1
-tn = np.zeros((60*4, 2))
-tn[:, 1] = 1
+ts = np.ones((30*6*4, 1))
+tn = np.zeros((60*5, 1))
 train_labels = np.concatenate((ts, tn))

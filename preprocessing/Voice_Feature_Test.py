@@ -32,8 +32,6 @@ test_input = np.concatenate((aaa, aaa1,
                             n, n1, n2, n3))
 test_input = np.expand_dims(test_input, 3)
 
-ts = np.zeros((8*6*2, 2))
-ts[:, 0] = 1
-tn = np.zeros((16*4, 2))
-tn[:, 1] = 1
+ts = np.ones((8*6*2, 1))
+tn = np.zeros((16*4, 1))
 test_labels = np.concatenate((ts, tn))

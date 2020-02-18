@@ -15,14 +15,14 @@ class Predict:
         # print('End of recording')
         myrecording = np.squeeze(myrecording)
         self.data = librosa.resample(myrecording, self.fs, 8000)
+        self.data = self.data[0:8000].astype(np.float64)
+        if np.max(self.data) > 1:
+            self.data = self.data / (2 ** (self.bits - 1))
 
     def voice_predicting(self, voice_model_path):
         model = keras.models.load_model(voice_model_path)
 
-        data = self.data[0:8000]
-        data = data.astype(np.float64)
-        if np.max(data) > 1:
-            data = data / (2 ** (self.bits - 1))
+        data = self.data
         data = librosa.feature.melspectrogram(data, self.fs)
         data = np.expand_dims(data, 0)
         data = np.expand_dims(data, 3)
@@ -30,7 +30,7 @@ class Predict:
         predictions_single = model.predict(data)
         predictions = predictions_single[0]
         print(predictions)
-        if np.argmax(predictions) == 0:
+        if predictions >= 0.5:
             voice = True
         else:
             voice = False
@@ -39,10 +39,7 @@ class Predict:
     def vowel_predicting(self, model_path):
         model = keras.models.load_model(model_path)
 
-        data = self.data[0:8000]
-        data = data.astype(np.float64)
-        if np.max(data) > 1:
-            data = data / (2 ** (self.bits - 1))
+        data = self.data
         data = librosa.feature.mfcc(data, self.fs)
         data = np.expand_dims(data, 0)
         data = np.expand_dims(data, 3)
