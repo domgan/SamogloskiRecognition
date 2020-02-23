@@ -3,19 +3,19 @@ from preprocessing.Vowel_Feature_Train import mfcc_from_mat
 
 fs = 8000
 
-aaa = mfcc_from_mat('data/taaa.mat', fs)
-eee = mfcc_from_mat('data/teee.mat', fs)
-iii = mfcc_from_mat('data/tiii.mat', fs)
-ooo = mfcc_from_mat('data/tooo.mat', fs)
-uuu = mfcc_from_mat('data/tuuu.mat', fs)
-yyy = mfcc_from_mat('data/tyyy.mat', fs)
+aaa = mfcc_from_mat('data/test/taaa.mat', fs)
+eee = mfcc_from_mat('data/test/teee.mat', fs)
+iii = mfcc_from_mat('data/test/tiii.mat', fs)
+ooo = mfcc_from_mat('data/test/tooo.mat', fs)
+uuu = mfcc_from_mat('data/test/tuuu.mat', fs)
+yyy = mfcc_from_mat('data/test/tyyy.mat', fs)
 
-aaa1 = mfcc_from_mat('data/taaa1.mat', fs)
-eee1 = mfcc_from_mat('data/teee1.mat', fs)
-iii1 = mfcc_from_mat('data/tiii1.mat', fs)
-ooo1 = mfcc_from_mat('data/tooo1.mat', fs)
-uuu1 = mfcc_from_mat('data/tuuu1.mat', fs)
-yyy1 = mfcc_from_mat('data/tyyy1.mat', fs)
+aaa1 = mfcc_from_mat('data/test/taaa1.mat', fs)
+eee1 = mfcc_from_mat('data/test/teee1.mat', fs)
+iii1 = mfcc_from_mat('data/test/tiii1.mat', fs)
+ooo1 = mfcc_from_mat('data/test/tooo1.mat', fs)
+uuu1 = mfcc_from_mat('data/test/tuuu1.mat', fs)
+yyy1 = mfcc_from_mat('data/test/tyyy1.mat', fs)
 
 test_input = np.concatenate((aaa, aaa1,
                              eee, eee1,

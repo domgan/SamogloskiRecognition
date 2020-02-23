@@ -3,24 +3,24 @@ from preprocessing.Voice_Feature_Train import melspec_from_mat
 
 fs = 8000
 
-aaa = melspec_from_mat('data/taaa.mat')
-eee = melspec_from_mat('data/teee.mat')
-iii = melspec_from_mat('data/tiii.mat')
-ooo = melspec_from_mat('data/tooo.mat')
-uuu = melspec_from_mat('data/tuuu.mat')
-yyy = melspec_from_mat('data/tyyy.mat')
+aaa = melspec_from_mat('data/test/taaa.mat')
+eee = melspec_from_mat('data/test/teee.mat')
+iii = melspec_from_mat('data/test/tiii.mat')
+ooo = melspec_from_mat('data/test/tooo.mat')
+uuu = melspec_from_mat('data/test/tuuu.mat')
+yyy = melspec_from_mat('data/test/tyyy.mat')
 
-aaa1 = melspec_from_mat('data/taaa1.mat')
-eee1 = melspec_from_mat('data/teee1.mat')
-iii1 = melspec_from_mat('data/tiii1.mat')
-ooo1 = melspec_from_mat('data/tooo1.mat')
-uuu1 = melspec_from_mat('data/tuuu1.mat')
-yyy1 = melspec_from_mat('data/tyyy1.mat')
+aaa1 = melspec_from_mat('data/test/taaa1.mat')
+eee1 = melspec_from_mat('data/test/teee1.mat')
+iii1 = melspec_from_mat('data/test/tiii1.mat')
+ooo1 = melspec_from_mat('data/test/tooo1.mat')
+uuu1 = melspec_from_mat('data/test/tuuu1.mat')
+yyy1 = melspec_from_mat('data/test/tyyy1.mat')
 
-n = melspec_from_mat('data/tn.mat')
-n1 = melspec_from_mat('data/tn1.mat')
-n2 = melspec_from_mat('data/tn2.mat')
-n3 = melspec_from_mat('data/tn3.mat')
+n = melspec_from_mat('data/test/tn.mat')
+n1 = melspec_from_mat('data/test/tn1.mat')
+n2 = melspec_from_mat('data/test/tn2.mat')
+n3 = melspec_from_mat('data/test/tn3.mat')
 
 
 test_input = np.concatenate((aaa, aaa1,
