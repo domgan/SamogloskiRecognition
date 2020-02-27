@@ -6,7 +6,7 @@ import scipy.io
 def mfcc_from_mat(path, fs=8000):
     mat = scipy.io.loadmat(path)
     mat = mat['y']
-    mat = mat[0:8000, :]  # shorten to 1 seconds
+    mat = mat[1000:8000, :]  # shorten to 1 seconds
     arr = []
     for i in range(mat.shape[1]):
         m = librosa.feature.mfcc(mat[:, i], fs)
@@ -57,16 +57,17 @@ train_input = np.concatenate((aaa, aaa1, aaa2, aaa3, aaa4,
                               yyy, yyy1, yyy2, yyy3, yyy4))
 train_input = np.expand_dims(train_input, 3)
 
-ta = np.zeros((30*5, 6))
+col = 5
+ta = np.zeros((30 * col, 6))
 ta[:, 0] = 1
-te = np.zeros((30*5, 6))
+te = np.zeros((30 * col, 6))
 te[:, 1] = 1
-ti = np.zeros((30*5, 6))
+ti = np.zeros((30 * col, 6))
 ti[:, 2] = 1
-to = np.zeros((30*5, 6))
+to = np.zeros((30 * col, 6))
 to[:, 3] = 1
-tu = np.zeros((30*5, 6))
+tu = np.zeros((30 * col, 6))
 tu[:, 4] = 1
-ty = np.zeros((30*5, 6))
+ty = np.zeros((30 * col, 6))
 ty[:, 5] = 1
 train_labels = np.concatenate((ta, te, ti, to, tu, ty))

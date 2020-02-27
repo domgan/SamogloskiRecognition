@@ -6,7 +6,7 @@ import scipy.io
 def melspec_from_mat(path, fs=8000):
     mat = scipy.io.loadmat(path)
     mat = mat['y']
-    mat = mat[0:8000, :]  # shorten to 1 seconds
+    mat = mat[1000:8000, :]  # shorten to 1 seconds
     arr = []
     for i in range(mat.shape[1]):
         m = librosa.feature.melspectrogram(mat[:, i], fs)
@@ -60,5 +60,3 @@ train_input = np.expand_dims(train_input, 3)
 ts = np.ones((30*6*4, 1))
 tn = np.zeros((60*5, 1))
 train_labels = np.concatenate((ts, tn))
-#p = np.concatenate((train_input, train_labels), axis = 0)
-#print(p)
