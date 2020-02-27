@@ -2,7 +2,7 @@ from tensorflow import keras
 from preprocessing import Voice_Feature_Train, Voice_Feature_Test
 
 model = keras.Sequential([
-    keras.layers.Conv2D(64, (5, 5), padding='same', input_shape=(128, 16, 1), activation='relu'),
+    keras.layers.Conv2D(64, (5, 5), padding='same', input_shape=(128, 14, 1), activation='relu'),
     keras.layers.Conv2D(64, (5, 5), padding='same', activation='relu'),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 

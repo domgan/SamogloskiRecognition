@@ -6,18 +6,22 @@ import librosa
 
 class Predict:
     def __init__(self):
-        self.fs = 44100  # Sample rate
+        self.fs = 8000  # Sample rate
         self.seconds = 1  # Duration
         self.bits = 16  # Bit depth
+        self.recording()
+        if np.max(self.data) > 1:
+            self.data = self.data / (2 ** (self.bits - 1))
+
+    def recording(self):
         # print('Recording...')
         myrecording = sd.rec(int(self.seconds * self.fs), samplerate=self.fs, channels=1)
         sd.wait()  # Wait until recording is finished
         # print('End of recording')
         myrecording = np.squeeze(myrecording)
-        self.data = librosa.resample(myrecording, self.fs, 8000)
-        self.data = self.data[0:8000].astype(np.float64)
-        if np.max(self.data) > 1:
-            self.data = self.data / (2 ** (self.bits - 1))
+        self.data = myrecording
+        # self.data = librosa.resample(myrecording, self.fs, 8000)  # resampling
+        self.data = self.data[1000:8000].astype(np.float64)
 
     def voice_predicting(self, voice_model_path):
         model = keras.models.load_model(voice_model_path)
