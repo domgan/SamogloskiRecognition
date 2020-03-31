@@ -1,7 +1,7 @@
 import sounddevice as sd
-from tensorflow import keras
+from tensorflow.keras import models
 import numpy as np
-import librosa
+from librosa.feature import melspectrogram, mfcc
 
 
 class Predict:
@@ -14,20 +14,19 @@ class Predict:
             self.data = self.data / (2 ** (self.bits - 1))
 
     def recording(self):
-        # print('Recording...')
-        myrecording = sd.rec(int(self.seconds * self.fs), samplerate=self.fs, channels=1)
+        print('Recording...')
+        myrecording = sd.rec(int(self.seconds * self.fs), self.fs, 1)
         sd.wait()  # Wait until recording is finished
-        # print('End of recording')
+        print('End of recording')
         myrecording = np.squeeze(myrecording)
         self.data = myrecording
-        # self.data = librosa.resample(myrecording, self.fs, 8000)  # resampling
         self.data = self.data[1000:8000].astype(np.float64)
 
     def voice_predicting(self, voice_model_path):
-        model = keras.models.load_model(voice_model_path)
+        model = models.load_model(voice_model_path)
 
         data = self.data
-        data = librosa.feature.melspectrogram(data, self.fs)
+        data = melspectrogram(data, self.fs)
         data = np.expand_dims(data, 0)
         data = np.expand_dims(data, 3)
 
@@ -41,10 +40,10 @@ class Predict:
         return voice
 
     def vowel_predicting(self, model_path):
-        model = keras.models.load_model(model_path)
+        model = models.load_model(model_path)
 
         data = self.data
-        data = librosa.feature.mfcc(data, self.fs)
+        data = mfcc(data, self.fs)
         data = np.expand_dims(data, 0)
         data = np.expand_dims(data, 3)
 
